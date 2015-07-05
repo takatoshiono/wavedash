@@ -12,9 +12,14 @@ describe Wavedash do
 
     context 'destination encoding is not set' do
       let(:encoding) { nil }
+      let(:str) { 'こんにちは〜' }
 
       it 'not raise error' do
-        expect { Wavedash.normalize("こんにちは\u{301C}") }.not_to raise_error
+        expect { Wavedash.normalize(str) }.not_to raise_error
+      end
+
+      it 'return the untouched argument' do
+        expect(Wavedash.normalize(str)).to eq str
       end
     end
 
@@ -82,15 +87,20 @@ describe Wavedash do
       Wavedash.destination_encoding = encoding
     end
 
-    context 'destination_encoding is not set' do
+    context 'destination encoding is not set' do
       let(:encoding) { nil }
+      let(:str) { 'こんにちは〜' }
 
       it 'not raise error' do
-        expect { Wavedash.invalid?("こんにちは\u{301C}") }.not_to raise_error
+        expect { Wavedash.invalid?(str) }.not_to raise_error
+      end
+
+      it 'return false' do
+        expect(Wavedash.invalid?(str)).to be_falsey
       end
     end
 
-    context 'destination_encoding is eucjp-ms' do
+    context 'destination encoding is eucjp-ms' do
       let(:encoding) { 'eucjp-ms' }
 
       it 'return false when not invalid characters' do
@@ -102,7 +112,7 @@ describe Wavedash do
       end
     end
 
-    context 'destination_encoding is euc-jp' do
+    context 'destination encoding is euc-jp' do
       let(:encoding) { 'euc-jp' }
 
       it 'return false when not invalid characters' do
