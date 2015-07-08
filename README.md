@@ -2,6 +2,26 @@
 
 Normalize characters that problem occurs when encoding.
 
+Character code conversion is required when interact between softwares that treet different character code. For example, it is a situation such as the following.
+
+* A Web application written in UTF-8 using a database saved in EUC-JP
+* Exchanging data files(csv,tsv,..) between different systems
+
+In Ruby, You can convert a character code using `String#encode`, but some characters cannot. Encoding::UndefinedConversionError raises when a character is undefined in the destination encoding. But `String#encode` has options. You can specify `:undef => :replace` then replace the undefined characters with the replacement character.
+
+`Wavedash` is similar to `String#encode` with `:undef => :replace`, but it does more aggressive character conversion.
+
+Despite some characters have resembling shape, character code point is different each other. For example, when you convert characters to EUCJP-MS from UTF-8, can convert "～" (FULLWIDTH TILDE U+FF5E) but cannot convert "〜" (WAVE DASH U+301C). The opposite will occur when you convert to EUC-JP.
+
+UNICODE | EUC-JP | EUCJP-MS |
+--------|--------|---------
+"〜" U+301C WAVE-DASH | 0xA1C1 | Encoding::UndefinedConversionError
+"～" U+FF5E FULLWIDTH TILDE | Encoding::UndefinedConversionError | 0xA1C1
+
+In Web applications, it depends on the client environment that the input character as "〜" is U+301C or U+FF5E. This cannot select by the application. What you can do with the application is only to determine the handling of the unencodable characters.
+
+`Wavedash` offers the option that to convert unencodable characters to resembling characters.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -20,14 +40,14 @@ Or install it yourself as:
 
 ## Usage
 
-### #configure
+### destination_encoding
 
-Configure destination encoding that your application needs.
+First af all, configure destination encoding that your application needs.
 
 ```ruby
 require 'wavedash'
 
-Wavedash.configure.destination_encoding = 'eucjp-ms'
+Wavedash.destination_encoding = 'eucjp-ms'
 ```
 
 ### #normalize
