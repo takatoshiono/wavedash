@@ -7,7 +7,7 @@ RSpec.configure do |config|
 end
 
 RSpec.shared_examples 'a normalized string' do
-  it 'raise exception when encode before normalize' do
+  it 'raises exception when encode before normalize' do
     expect {
       str.encode(encoding)
     }.to raise_error Encoding::UndefinedConversionError

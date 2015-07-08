@@ -18,7 +18,7 @@ describe Wavedash do
         expect { Wavedash.normalize(str) }.not_to raise_error
       end
 
-      it 'return the untouched argument' do
+      it 'returns the untouched argument' do
         expect(Wavedash.normalize(str)).to eq str
       end
     end
@@ -26,22 +26,22 @@ describe Wavedash do
     context 'destination encoding is eucjp-ms' do
       let(:encoding) { 'eucjp-ms' }
 
-      context 'include some invalid characters' do
+      context 'includes some invalid characters' do
         let(:str) { "こんにちは\u{301C}。コンニチハ\u{2212}" }
 
         it_behaves_like 'a normalized string'
 
-        it 'convert all' do
+        it 'converts all' do
           expect(Wavedash.normalize(str)).to eq "こんにちは\u{FF5E}。コンニチハ\u{FF0D}"
         end
       end
 
-      context 'include WAVE DASH(U+301C)' do
+      context 'includes WAVE DASH(U+301C)' do
         let(:str) { "こんにちは\u{301C}" }
 
         it_behaves_like 'a normalized string'
 
-        it 'convert it to FULLWIDTH TILDE(U+FF5E)' do
+        it 'converts it to FULLWIDTH TILDE(U+FF5E)' do
           expect(Wavedash.normalize(str)).to eq "こんにちは\u{FF5E}"
         end
       end
@@ -51,7 +51,7 @@ describe Wavedash do
 
         it_behaves_like 'a normalized string'
 
-        it 'convert it to FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
+        it 'converts it to FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
           expect(Wavedash.normalize(str)).to eq "\u{FF0D}"
         end
       end
@@ -61,7 +61,7 @@ describe Wavedash do
 
         it_behaves_like 'a normalized string'
 
-        it 'convert it to PARALLEL TO(U+2225)' do
+        it 'converts it to PARALLEL TO(U+2225)' do
           expect(Wavedash.normalize(str)).to eq "\u{2225}"
         end
       end
@@ -75,7 +75,7 @@ describe Wavedash do
 
         it_behaves_like 'a normalized string'
 
-        it 'convert it to WAVE DASH(U+301C)' do
+        it 'converts it to WAVE DASH(U+301C)' do
           expect(Wavedash.normalize(str)).to eq "\u{301C}"
         end
       end
@@ -85,7 +85,7 @@ describe Wavedash do
 
         it_behaves_like 'a normalized string'
 
-        it 'convert it to MINUS SIGN(U+2212)' do
+        it 'converts it to MINUS SIGN(U+2212)' do
           expect(Wavedash.normalize(str)).to eq "\u{2212}"
         end
       end
@@ -105,7 +105,7 @@ describe Wavedash do
         expect { Wavedash.invalid?(str) }.not_to raise_error
       end
 
-      it 'return false' do
+      it 'returns false' do
         expect(Wavedash.invalid?(str)).to be_falsey
       end
     end
@@ -113,15 +113,15 @@ describe Wavedash do
     context 'destination encoding is eucjp-ms' do
       let(:encoding) { 'eucjp-ms' }
 
-      it 'return false when not invalid characters' do
+      it 'returns false when not invalid characters' do
         expect(Wavedash.invalid?('こんにちは')).to be_falsey
       end
 
-      it 'return true when include WAVE DASH(U+301C)' do
+      it 'returns true when include WAVE DASH(U+301C)' do
         expect(Wavedash.invalid?("\u{301C}")).to be_truthy
       end
 
-      it 'return true when include DOUBLE VERTICAL LINE(U+2016)' do
+      it 'returns true when include DOUBLE VERTICAL LINE(U+2016)' do
         expect(Wavedash.invalid?("\u{2016}")).to be_truthy
       end
     end
@@ -129,15 +129,15 @@ describe Wavedash do
     context 'destination encoding is euc-jp' do
       let(:encoding) { 'euc-jp' }
 
-      it 'return false when not invalid characters' do
+      it 'returns false when not invalid characters' do
         expect(Wavedash.invalid?('こんにちは')).to be_falsey
       end
 
-      it 'return true when include FULLWIDTH TILDE(U+FF5E)' do
+      it 'returns true when include FULLWIDTH TILDE(U+FF5E)' do
         expect(Wavedash.invalid?("\u{FF5E}")).to be_truthy
       end
 
-      it 'return true when include PARALLEL TO(U+2225)' do
+      it 'returns true when include PARALLEL TO(U+2225)' do
         expect(Wavedash.invalid?("\u{2225}")).to be_truthy
       end
     end
