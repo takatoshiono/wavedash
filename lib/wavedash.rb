@@ -8,10 +8,12 @@ module Wavedash
       # source => destination
       "\u{301C}" => "\u{FF5E}",
       "\u{2212}" => "\u{FF0D}",
+      "\u{2016}" => "\u{2225}",
     },
     'euc-jp' => {
       "\u{FF5E}" => "\u{301C}",
       "\u{FF0D}" => "\u{2212}",
+      "\u{2225}" => "\u{2016}",
     },
   }
 

@@ -55,6 +55,16 @@ describe Wavedash do
           expect(Wavedash.normalize(str)).to eq "\u{FF0D}"
         end
       end
+
+      context 'include DOUBLE VERTICAL LINE(U+2016)' do
+        let(:str) { "\u{2016}" }
+
+        it_behaves_like 'a normalized string'
+
+        it 'convert it to PARALLEL TO(U+2225)' do
+          expect(Wavedash.normalize(str)).to eq "\u{2225}"
+        end
+      end
     end
 
     context 'destination encoding is euc-jp' do
@@ -110,6 +120,10 @@ describe Wavedash do
       it 'return true when include WAVE DASH(U+301C)' do
         expect(Wavedash.invalid?("\u{301C}")).to be_truthy
       end
+
+      it 'return true when include DOUBLE VERTICAL LINE(U+2016)' do
+        expect(Wavedash.invalid?("\u{2016}")).to be_truthy
+      end
     end
 
     context 'destination encoding is euc-jp' do
@@ -121,6 +135,10 @@ describe Wavedash do
 
       it 'return true when include FULLWIDTH TILDE(U+FF5E)' do
         expect(Wavedash.invalid?("\u{FF5E}")).to be_truthy
+      end
+
+      it 'return true when include PARALLEL TO(U+2225)' do
+        expect(Wavedash.invalid?("\u{2225}")).to be_truthy
       end
     end
   end
