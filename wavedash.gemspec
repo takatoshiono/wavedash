@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Takatoshi Ono"]
   spec.email         = ["takatoshi.ono@gmail.com"]
 
-  spec.summary       = %q{Normalize characters like WAVE DASH}
-  spec.description   = %q{Normalize characters that problem occurs when encoding}
+  spec.summary       = %q{Normalize unencodable characters}
+  spec.description   = %q{Normalize unencodable characters}
   spec.homepage      = "https://github.com/takatoshiono/wavedash"
   spec.license       = "MIT"
 
