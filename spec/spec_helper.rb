@@ -19,3 +19,9 @@ RSpec.shared_examples 'a unencodable string before-after' do
     }.not_to raise_error
   end
 end
+
+RSpec.shared_examples 'a expected normalization' do
+  it "is converted to a encodable string" do
+    expect(Wavedash.normalize(str)).to eq normalized_str
+  end
+end

@@ -28,42 +28,34 @@ describe Wavedash do
 
       context 'includes some invalid characters' do
         let(:str) { "こんにちは\u{301C}。コンニチハ\u{2212}" }
+        let(:normalized_str) { "こんにちは\u{FF5E}。コンニチハ\u{FF0D}" }
 
         it_behaves_like 'a unencodable string before-after'
-
-        it 'converts all' do
-          expect(Wavedash.normalize(str)).to eq "こんにちは\u{FF5E}。コンニチハ\u{FF0D}"
-        end
+        it_behaves_like 'a expected normalization'
       end
 
       context 'includes WAVE DASH(U+301C)' do
         let(:str) { "こんにちは\u{301C}" }
+        let(:normalized_str) { "こんにちは\u{FF5E}" }
 
         it_behaves_like 'a unencodable string before-after'
-
-        it 'converts it to FULLWIDTH TILDE(U+FF5E)' do
-          expect(Wavedash.normalize(str)).to eq "こんにちは\u{FF5E}"
-        end
+        it_behaves_like 'a expected normalization'
       end
 
       context 'include MINUS SIGN(U+2212)' do
         let(:str) { "\u{2212}" }
+        let(:normalized_str) { "\u{FF0D}" }
 
         it_behaves_like 'a unencodable string before-after'
-
-        it 'converts it to FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
-          expect(Wavedash.normalize(str)).to eq "\u{FF0D}"
-        end
+        it_behaves_like 'a expected normalization'
       end
 
       context 'include DOUBLE VERTICAL LINE(U+2016)' do
         let(:str) { "\u{2016}" }
+        let(:normalized_str) { "\u{2225}" }
 
         it_behaves_like 'a unencodable string before-after'
-
-        it 'converts it to PARALLEL TO(U+2225)' do
-          expect(Wavedash.normalize(str)).to eq "\u{2225}"
-        end
+        it_behaves_like 'a expected normalization'
       end
     end
 
@@ -72,22 +64,18 @@ describe Wavedash do
 
       context 'include FULLWIDTH TILDE(U+FF5E)' do
         let(:str) { "\u{FF5E}" }
+        let(:normalized_str) { "\u{301C}" }
 
         it_behaves_like 'a unencodable string before-after'
-
-        it 'converts it to WAVE DASH(U+301C)' do
-          expect(Wavedash.normalize(str)).to eq "\u{301C}"
-        end
+        it_behaves_like 'a expected normalization'
       end
 
       context 'include FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
         let(:str) { "\u{FF0D}" }
+        let(:normalized_str) { "\u{2212}" }
 
         it_behaves_like 'a unencodable string before-after'
-
-        it 'converts it to MINUS SIGN(U+2212)' do
-          expect(Wavedash.normalize(str)).to eq "\u{2212}"
-        end
+        it_behaves_like 'a expected normalization'
       end
     end
   end
