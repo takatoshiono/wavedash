@@ -5,15 +5,14 @@ module Wavedash
 
   CHARACTER_CODE_MAPPING = {
     'eucjp-ms' => {
-      # source => destination
-      "\u{301C}" => "\u{FF5E}",
-      "\u{2212}" => "\u{FF0D}",
-      "\u{2016}" => "\u{2225}",
+      "\u{301C}" => "\u{FF5E}", # 'WAVE DASH' => 'FULLWIDTH TILDE'
+      "\u{2212}" => "\u{FF0D}", # 'MINUS SIGN' => 'FULLWIDTH HYPHEN-MINUS'
+      "\u{2016}" => "\u{2225}", # 'DOUBLE VERTICAL LINE' => 'PARALLEL TO'
     },
     'euc-jp' => {
-      "\u{FF5E}" => "\u{301C}",
-      "\u{FF0D}" => "\u{2212}",
-      "\u{2225}" => "\u{2016}",
+      "\u{FF5E}" => "\u{301C}", # 'FULLWIDTH TILDE' => 'WAVE DASH'
+      "\u{FF0D}" => "\u{2212}", # 'FULLWIDTH HYPHEN-MINUS' => 'MINUS SIGN'
+      "\u{2225}" => "\u{2016}", # 'PARALLEL TO' => 'DOUBLE VERTICAL LINE'
     },
   }
 

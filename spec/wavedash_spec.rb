@@ -27,32 +27,32 @@ describe Wavedash do
       let(:encoding) { 'eucjp-ms' }
 
       context 'includes some invalid characters' do
-        let(:str) { "こんにちは\u{301C}。コンニチハ\u{2212}" }
-        let(:normalized_str) { "こんにちは\u{FF5E}。コンニチハ\u{FF0D}" }
+        let(:str) { "こんにちは〜。コンニチハ−" }
+        let(:normalized_str) { "こんにちは～。コンニチハ－" }
 
         it_behaves_like 'a unencodable string before-after'
         it_behaves_like 'a expected normalization'
       end
 
       context 'includes WAVE DASH(U+301C)' do
-        let(:str) { "こんにちは\u{301C}" }
-        let(:normalized_str) { "こんにちは\u{FF5E}" }
+        let(:str) { "こんにちは〜" }
+        let(:normalized_str) { "こんにちは～" }
 
         it_behaves_like 'a unencodable string before-after'
         it_behaves_like 'a expected normalization'
       end
 
       context 'include MINUS SIGN(U+2212)' do
-        let(:str) { "\u{2212}" }
-        let(:normalized_str) { "\u{FF0D}" }
+        let(:str) { "−" }
+        let(:normalized_str) { "－" }
 
         it_behaves_like 'a unencodable string before-after'
         it_behaves_like 'a expected normalization'
       end
 
       context 'include DOUBLE VERTICAL LINE(U+2016)' do
-        let(:str) { "\u{2016}" }
-        let(:normalized_str) { "\u{2225}" }
+        let(:str) { "‖" }
+        let(:normalized_str) { "∥" }
 
         it_behaves_like 'a unencodable string before-after'
         it_behaves_like 'a expected normalization'
@@ -63,16 +63,16 @@ describe Wavedash do
       let(:encoding) { 'euc-jp' }
 
       context 'include FULLWIDTH TILDE(U+FF5E)' do
-        let(:str) { "\u{FF5E}" }
-        let(:normalized_str) { "\u{301C}" }
+        let(:str) { "こんにちは～" }
+        let(:normalized_str) { "こんにちは〜" }
 
         it_behaves_like 'a unencodable string before-after'
         it_behaves_like 'a expected normalization'
       end
 
       context 'include FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
-        let(:str) { "\u{FF0D}" }
-        let(:normalized_str) { "\u{2212}" }
+        let(:str) { "－" }
+        let(:normalized_str) { "−" }
 
         it_behaves_like 'a unencodable string before-after'
         it_behaves_like 'a expected normalization'
@@ -106,11 +106,11 @@ describe Wavedash do
       end
 
       it 'returns true when include WAVE DASH(U+301C)' do
-        expect(Wavedash.invalid?("\u{301C}")).to be_truthy
+        expect(Wavedash.invalid?("こんにちは〜")).to be_truthy
       end
 
       it 'returns true when include DOUBLE VERTICAL LINE(U+2016)' do
-        expect(Wavedash.invalid?("\u{2016}")).to be_truthy
+        expect(Wavedash.invalid?("‖")).to be_truthy
       end
     end
 
@@ -122,11 +122,11 @@ describe Wavedash do
       end
 
       it 'returns true when include FULLWIDTH TILDE(U+FF5E)' do
-        expect(Wavedash.invalid?("\u{FF5E}")).to be_truthy
+        expect(Wavedash.invalid?("こんにちは～")).to be_truthy
       end
 
       it 'returns true when include PARALLEL TO(U+2225)' do
-        expect(Wavedash.invalid?("\u{2225}")).to be_truthy
+        expect(Wavedash.invalid?("∥")).to be_truthy
       end
     end
   end
