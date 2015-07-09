@@ -42,7 +42,7 @@ describe Wavedash do
         it_behaves_like 'a expected normalization'
       end
 
-      context 'include MINUS SIGN(U+2212)' do
+      context 'includes MINUS SIGN(U+2212)' do
         let(:str) { "−" }
         let(:normalized_str) { "－" }
 
@@ -50,7 +50,7 @@ describe Wavedash do
         it_behaves_like 'a expected normalization'
       end
 
-      context 'include DOUBLE VERTICAL LINE(U+2016)' do
+      context 'includes DOUBLE VERTICAL LINE(U+2016)' do
         let(:str) { "‖" }
         let(:normalized_str) { "∥" }
 
@@ -62,7 +62,7 @@ describe Wavedash do
     context 'destination encoding is euc-jp' do
       let(:encoding) { 'euc-jp' }
 
-      context 'include FULLWIDTH TILDE(U+FF5E)' do
+      context 'includes FULLWIDTH TILDE(U+FF5E)' do
         let(:str) { "こんにちは～" }
         let(:normalized_str) { "こんにちは〜" }
 
@@ -70,9 +70,17 @@ describe Wavedash do
         it_behaves_like 'a expected normalization'
       end
 
-      context 'include FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
+      context 'includes FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
         let(:str) { "－" }
         let(:normalized_str) { "−" }
+
+        it_behaves_like 'a unencodable string before-after'
+        it_behaves_like 'a expected normalization'
+      end
+
+      context 'includes PARALLEL TO(U+2225)' do
+        let(:str) { "∥" }
+        let(:normalized_str) { "‖" }
 
         it_behaves_like 'a unencodable string before-after'
         it_behaves_like 'a expected normalization'
