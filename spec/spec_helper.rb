@@ -6,7 +6,7 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
 end
 
-RSpec.shared_examples 'a normalized string' do
+RSpec.shared_examples 'a unencodable string before-after' do
   it 'raises exception when encode before normalize' do
     expect {
       str.encode(encoding)

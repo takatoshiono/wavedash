@@ -29,7 +29,7 @@ describe Wavedash do
       context 'includes some invalid characters' do
         let(:str) { "こんにちは\u{301C}。コンニチハ\u{2212}" }
 
-        it_behaves_like 'a normalized string'
+        it_behaves_like 'a unencodable string before-after'
 
         it 'converts all' do
           expect(Wavedash.normalize(str)).to eq "こんにちは\u{FF5E}。コンニチハ\u{FF0D}"
@@ -39,7 +39,7 @@ describe Wavedash do
       context 'includes WAVE DASH(U+301C)' do
         let(:str) { "こんにちは\u{301C}" }
 
-        it_behaves_like 'a normalized string'
+        it_behaves_like 'a unencodable string before-after'
 
         it 'converts it to FULLWIDTH TILDE(U+FF5E)' do
           expect(Wavedash.normalize(str)).to eq "こんにちは\u{FF5E}"
@@ -49,7 +49,7 @@ describe Wavedash do
       context 'include MINUS SIGN(U+2212)' do
         let(:str) { "\u{2212}" }
 
-        it_behaves_like 'a normalized string'
+        it_behaves_like 'a unencodable string before-after'
 
         it 'converts it to FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
           expect(Wavedash.normalize(str)).to eq "\u{FF0D}"
@@ -59,7 +59,7 @@ describe Wavedash do
       context 'include DOUBLE VERTICAL LINE(U+2016)' do
         let(:str) { "\u{2016}" }
 
-        it_behaves_like 'a normalized string'
+        it_behaves_like 'a unencodable string before-after'
 
         it 'converts it to PARALLEL TO(U+2225)' do
           expect(Wavedash.normalize(str)).to eq "\u{2225}"
@@ -73,7 +73,7 @@ describe Wavedash do
       context 'include FULLWIDTH TILDE(U+FF5E)' do
         let(:str) { "\u{FF5E}" }
 
-        it_behaves_like 'a normalized string'
+        it_behaves_like 'a unencodable string before-after'
 
         it 'converts it to WAVE DASH(U+301C)' do
           expect(Wavedash.normalize(str)).to eq "\u{301C}"
@@ -83,7 +83,7 @@ describe Wavedash do
       context 'include FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
         let(:str) { "\u{FF0D}" }
 
-        it_behaves_like 'a normalized string'
+        it_behaves_like 'a unencodable string before-after'
 
         it 'converts it to MINUS SIGN(U+2212)' do
           expect(Wavedash.normalize(str)).to eq "\u{2212}"
