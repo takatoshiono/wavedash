@@ -6,6 +6,8 @@ Normalize unencodable characters that raise `Encoding::UndefinedConversionError`
 
 * eucjp-ms
 * euc-jp
+* cp932
+* shift_jis
 
 ## Installation
 
