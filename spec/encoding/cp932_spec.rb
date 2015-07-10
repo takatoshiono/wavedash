@@ -82,6 +82,10 @@ describe 'destination encoding is cp932' do
       expect(Wavedash.invalid?("こんにちは〜")).to be_truthy
     end
 
+    it 'returns true when include MINUS SIGN(U+2212)' do
+      expect(Wavedash.invalid?("−")).to be_truthy
+    end
+
     it 'returns true when include DOUBLE VERTICAL LINE(U+2016)' do
       expect(Wavedash.invalid?("‖")).to be_truthy
     end

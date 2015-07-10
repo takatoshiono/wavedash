@@ -66,6 +66,10 @@ describe 'destination encoding is euc-jp' do
       expect(Wavedash.invalid?("こんにちは～")).to be_truthy
     end
 
+    it 'returns true when include FULLWIDTH HYPHEN-MINUS(U+FF0D)' do
+      expect(Wavedash.invalid?("－")).to be_truthy
+    end
+
     it 'returns true when include PARALLEL TO(U+2225)' do
       expect(Wavedash.invalid?("∥")).to be_truthy
     end
