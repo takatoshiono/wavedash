@@ -55,6 +55,14 @@ describe 'destination encoding is shift_jis' do
       it_behaves_like 'a unencodable string before-after'
       it_behaves_like 'a expected normalization'
     end
+
+    context 'includes EN DASH(U+2013)' do
+      let(:str) { "–" }
+      let(:normalized_str) { "—" }
+
+      it_behaves_like 'a unencodable string before-after'
+      it_behaves_like 'a expected normalization'
+    end
   end
 
   describe '#invalid?' do
@@ -84,6 +92,10 @@ describe 'destination encoding is shift_jis' do
 
     it 'returns true when include FULLWIDTH NOT SIGN(0+FFE2)' do
       expect(Wavedash.invalid?("￢")).to be_truthy
+    end
+
+    it 'returns true when include EN DASH(0+2013)' do
+      expect(Wavedash.invalid?("–")).to be_truthy
     end
   end
 end
