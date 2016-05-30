@@ -34,6 +34,7 @@ module Wavedash
       "\u{FF5E}" => "\u{301C}", # 'FULLWIDTH TILDE' => 'WAVE DASH'
       "\u{FF0D}" => "\u{2212}", # 'FULLWIDTH HYPHEN-MINUS' => 'MINUS SIGN'
       "\u{2225}" => "\u{2016}", # 'PARALLEL TO' => 'DOUBLE VERTICAL LINE'
+      "\u{2013}" => "\u{2014}", # 'EN DASH' => 'EM DASH'
       "\u{FFE0}" => "\u{00A2}", # 'FULLWIDTH CENT SIGN' => 'CENT SIGN'
       "\u{FFE1}" => "\u{00A3}", # 'FULLWIDTH POUND SIGN' => 'POUND SIGN'
       "\u{FFE2}" => "\u{00AC}", # 'FULLWIDTH NOT SIGN' => 'NOT SIGN'
